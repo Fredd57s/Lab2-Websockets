@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab WebSockets - Chat</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="chat-container">
+        <div id="connection-status">Connection lost. Reconnecting...</div>
+        <div class="chat-header">
+            Laboratorio WebSockets
+            <div id="user-count" style="font-size: 0.8em; color: #615f5f; margin-top: 5px; font-weight: normal;">
+                Usuarios conectados: <span>0</span>
+            </div>
+            
+            <div class="room-selector">
+                <select id="room-select">
+                    <option value="General">General</option>
+                    <option value="Coding">Coding</option>
+                    <option value="Gaming">Gaming</option>
+                </select>
+                <button id="open-board-btn" style="margin-left: 10px; cursor: pointer; padding: 2px 8px; border-radius: 5px;">🎨 Pizarra</button>
+            </div>
+        </div>
+
+        <div id="chat-box"></div>
+        
+        <div id="typing-indicator" class="hidden">Alguien está escribiendo...</div>
+
+        <form id="chat-form">
+            <input type="file" id="image-input" accept="image/*" style="display: none;" />
+            <input type="file" id="file-input" style="display: none;" /> <button type="button" id="img-btn" title="Enviar imagen">
+                <div class="icon-circle">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera" class="svg-inline--fa fa-camera fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path class="camera-path" d="M149.1 132.6l42.6-32 1.6-1.2C203.1 90.3 216 80 231.9 80h48.2c15.9 0 28.8 10.3 38.6 19.4l1.6 1.2 42.6 32c1.7 1.3 3.7 2 5.8 2H464c26.5 0 48 21.5 48 48v256c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V182.6c0-26.5 21.5-48 48-48h95.3c2.1 0 4.1-.7 5.8-2zM256 224c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm176 176c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zM256 160c88.4 0 160 71.6 160 160s-71.6 160-160 160S96 408.4 96 320s71.6-160 160-160z"></path>
+                        <circle class="camera-lens" cx="256" cy="320" r="80"></circle> 
+                    </svg>
+                </div>
+            </button>
+
+            <button type="button" id="file-btn" title="Enviar archivo">
+                <div class="icon-circle">
+                    <svg aria-hidden="true" focusable="false" class="svg-inline--fa" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path fill="var(--icon-color)" d="M43.24 466.76l-18.02-18.02c-31.25-31.25-31.25-81.9 0-113.14l205.34-205.34c15.62-15.62 40.95-15.62 56.57 0l18.02 18.02c15.62 15.62 15.62 40.95 0 56.57l-155.19 155.18c-7.81 7.81-20.47 7.81-28.28 0l-18.02-18.02c-7.81-7.81-7.81-20.47 0-28.28l121.2-121.21c3.12-3.12 3.12-8.19 0-11.31l-14.14-14.14c-3.12-3.12-8.19-3.12-11.31 0l-121.2 121.21c-23.44 23.44-23.44 61.42 0 84.85l18.02 18.02c23.44 23.44 61.42 23.44 84.85 0l155.19-155.18c31.24-31.24 31.24-81.89 0-113.13l-18.02-18.02c-31.25-31.25-81.9-31.25-113.14 0L37.1 278.43c-46.88 46.88-46.88 122.86 0 169.74l18.02 18.02c46.88 46.88 122.86 46.88 169.74 0l183.18-183.18c3.12-3.12 3.12-8.19 0-11.31l-14.14-14.14c-3.12-3.12-8.19-3.12-11.31 0L209.41 466.76c-46.88 46.88-122.86 46.88-169.74 0z"></path>
+                    </svg>
+                </div>
+            </button>
+            
+            <input type="text" id="mensaje-input" autocomplete="off" placeholder="Escribe un mensaje..." />
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="js/main.js"></script>
+
+    <div id="whiteboard-modal" class="hidden">
+        <div class="whiteboard-content">
+            <div class="whiteboard-header">
+                <span>Pizarra Colaborativa</span>
+                <div class="tools">
+                    <input type="color" id="color-picker" value="#0084ff" title="Color del pincel">
+                    <input type="range" id="size-picker" min="1" max="10" value="3" title="Grosor">
+                    <button id="clear-board-btn">🗑️ Limpiar</button>
+                    <button id="close-board-btn">❌ Cerrar</button>
+                </div>
+            </div>
+            <canvas id="whiteboard-canvas" width="800" height="500"></canvas>
+        </div>
+    </div>
+    
+</body>
+</html>

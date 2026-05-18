@@ -1,0 +1,333 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e9eaee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    width: 400px;
+    height: 600px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background-color: #ffffff;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #333;
+}
+
+#chat-box {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #ffffff;
+}
+
+.mensaje {
+    max-width: 75%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 0.95em;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.mensaje.me {
+    align-self: flex-end;
+    background-color: #0084ff;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.mensaje.them {
+    align-self: flex-start;
+    background-color: #f0f0f0;
+    color: black;
+    border-bottom-left-radius: 4px;
+}
+
+/* Contenedor del formulario */
+#chat-form {
+    display: flex;
+    align-items: center; /* Centra todo verticalmente */
+    padding: 10px 15px; /* Reducimos un poco el padding vertical */
+    background-color: #ffffff;
+    border-top: 1px solid #ddd;
+    gap: 8px; /* Reducimos ligeramente el espacio entre elementos */
+    width: 100%; /* Asegura que no rebase el contenedor principal */
+}
+
+/* Evita que los botones de íconos se encojan */
+#img-btn, #file-btn {
+    flex-shrink: 0; 
+}
+
+/* El campo de texto */
+#mensaje-input {
+    flex: 1 1 auto; /* Le dice a Flexbox: crece si puedes, encógete si debes */
+    width: 100%; /* Este es el truco vital para que respete los márgenes */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    outline: none;
+    font-size: 0.95em;
+}
+
+/* El botón de enviar */
+#chat-form button[type="submit"] {
+    flex-shrink: 0; /* Protege al texto para que no se aplaste ni se corte */
+    padding: 8px 5px;
+    margin-right: 5px; /* Un margen de seguridad contra el borde derecho */
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    color: #0084ff;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+button:hover {
+    color: #006bce;
+}
+
+
+
+
+
+/* colores del tema */
+:root {
+    --primary-color: #0084ff; 
+    --icon-color: #ffffff;   
+}
+
+#img-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-circle {
+    width: 32px; 
+    height: 32px;
+    background-color: var(--primary-color); 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s; 
+}
+
+#img-btn .svg-inline--fa {
+    width: 18px; 
+    height: 18px;
+    fill: var(--icon-color); 
+    transition: fill 0.3s;   
+}
+
+#img-btn .camera-lens {
+    fill: var(--primary-color); 
+    transition: fill 0.3s;      
+}
+#img-btn:hover .icon-circle {
+    background-color: #006bce; 
+}
+
+#img-btn:hover .svg-inline--fa {
+    fill: #ffffff; 
+}
+
+
+
+
+/* Estilos para el indicador de escritura */
+#typing-indicator {
+    font-size: 0.85em;
+    color: #888;
+    padding: 0 20px 10px 20px;
+    font-style: italic;
+    background-color: #ffffff;
+    display: none; /* Oculto por defecto */
+}
+
+/*  indicador cuando sea necesario */
+#typing-indicator.active {
+    display: block;
+}
+
+
+
+
+/* Estilo para los enlaces de descarga de archivos en los mensajes */
+.mensaje a {
+    color: inherit;
+    text-decoration: underline;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 2px;
+}
+
+.mensaje small {
+    display: block;
+    font-size: 0.75em;
+    opacity: 0.8;
+    margin-top: 4px;
+}
+
+
+
+
+/* Estilos para notificaciones del sistema (conexiones/desconexiones) */
+.mensaje.sistema {
+    align-self: center;
+    background-color: transparent;
+    color: #888888;
+    font-size: 0.85em;
+    font-weight: 500;
+    padding: 2px 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+
+
+
+
+
+/* Estilos para el selector de salas */
+.room-selector {
+    margin-top: 8px;
+}
+
+#room-select {
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 0.85em;
+    cursor: pointer;
+    outline: none;
+    color: #333;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+/* Estilos para el banner de reconexión */
+#connection-status {
+    background-color: #ff4d4f; /* Rojo para errores/desconexión */
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 0.85em;
+    font-weight: bold;
+    display: none; /* Oculto por defecto */
+    transition: background-color 0.3s;
+}
+
+/* Clases para mostrar el banner y cambiar su estado */
+#connection-status.visible {
+    display: block;
+}
+
+#connection-status.success {
+    background-color: #52c41a; /* Verde para éxito */
+}
+
+
+
+
+
+
+
+
+
+/* --- Estilos para la Pizarra Colaborativa --- */
+#whiteboard-modal {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#whiteboard-modal.hidden {
+    display: none;
+}
+
+.whiteboard-content {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+}
+
+.whiteboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.whiteboard-header .tools {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#whiteboard-canvas {
+    border: 1px solid #ccc;
+    cursor: crosshair; /* Cursor de mirilla para dibujar */
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+#clear-board-btn, #close-board-btn {
+    padding: 5px 10px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#close-board-btn {
+    background: #ff4d4f;
+    color: white;
+}
